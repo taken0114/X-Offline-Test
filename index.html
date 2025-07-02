@@ -22,11 +22,11 @@
         .container {
             display: flex;
             width: 100%;
-            max-width: 1200px; /* 横幅を広げた */
+            max-width: 1400px; /* 横幅をさらに広げた */
             gap: 20px;
         }
 
-        .compose-section, .preview-section {
+        .compose-section, .preview-section, .checklist-section {
             background-color: rgb(0, 0, 0);
             border-radius: 12px;
             border: 1px solid rgb(39, 44, 48);
@@ -36,15 +36,44 @@
 
         .compose-section {
             flex: 1;
-            min-width: 450px; /* 横幅を広げた */
+            min-width: 450px;
         }
 
         .preview-section {
             flex: 1;
-            min-width: 450px; /* 横幅を広げた */
+            min-width: 450px;
             height: fit-content;
             position: sticky;
-            top: 20px; /* Sticky position for preview */
+            top: 20px;
+        }
+
+        .checklist-section {
+            flex: 0.5; /* チェックリストセクションの幅を調整 */
+            min-width: 250px; /* 最小幅を設定 */
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            display: flex; /* Flexboxを適用 */
+            flex-direction: column; /* 縦方向に並べる */
+            gap: 10px; /* 各項目の間隔 */
+        }
+
+        .checklist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgb(39, 44, 48); /* 区切り線 */
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none; /* 最後の項目は区切り線なし */
+        }
+
+        .checklist-item label {
+            flex-grow: 1; /* ラベルが利用可能なスペースを占めるように */
+            margin-right: 10px; /* チェックボックスとの間隔 */
         }
 
         .header {
@@ -65,7 +94,7 @@
         .username {
             font-weight: bold;
             color: rgb(231, 233, 234);
-            font-size: 15px; /* Xのデフォルトフォントサイズ */
+            font-size: 15px;
         }
 
         .textarea-wrapper {
@@ -85,7 +114,7 @@
             resize: vertical;
             box-sizing: border-box;
             outline: none;
-            padding-right: 60px; /* 文字数カウントのスペース */
+            padding-right: 60px;
         }
 
         textarea:focus {
@@ -127,8 +156,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px; /* Xのボタンサイズに合わせた */
-            height: 36px; /* Xのボタンサイズに合わせた */
+            width: 36px;
+            height: 36px;
         }
 
         .action-buttons button:hover {
@@ -155,7 +184,7 @@
             background-color: rgb(26, 145, 218);
         }
 
-        /* Preview styles (Based on the second HTML provided) */
+        /* Preview styles */
         .preview-header {
             display: flex;
             align-items: center;
@@ -175,40 +204,39 @@
             font-weight: bold;
             color: rgb(231, 233, 234);
             margin-right: 4px;
-            font-size: 15px; /* Xのプレビューのユーザー名に合わせた */
+            font-size: 15px;
         }
 
         .preview-handle {
             color: rgb(113, 118, 123);
-            font-size: 15px; /* Xのプレビューのハンドル名に合わせた */
+            font-size: 15px;
         }
 
         .preview-content {
             font-size: 17px;
             line-height: 24px;
             color: rgb(231, 233, 234);
-            white-space: pre-wrap; /* 改行を反映 */
+            white-space: pre-wrap;
             word-wrap: break-word;
         }
 
         .preview-content .hashtag {
-            color: rgb(29, 155, 240); /* Xのハッシュタグカラー */
+            color: rgb(29, 155, 240);
         }
 
         .preview-timestamp {
             font-size: 15px;
             color: rgb(113, 118, 123);
             margin-top: 8px;
-            border-bottom: 1px solid rgb(39, 44, 48); /* セパレータ */
+            border-bottom: 1px solid rgb(39, 44, 48);
             padding-bottom: 12px;
             margin-bottom: 12px;
         }
 
-        /* アイコンはSVGに置き換えることも可能ですが、今回は簡略化 */
         .action-buttons svg {
-            fill: currentColor; /* SVGの色を親要素の文字色に合わせる */
-            width: 20px; /* Xのアイコンサイズに合わせた */
-            height: 20px; /* Xのアイコンサイズに合わせた */
+            fill: currentColor;
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -257,6 +285,69 @@
             </div>
         </div>
 
+        <div class="checklist-section">
+            <div class="checklist-item">
+                <label for="check1">企業名は間違っていないか</label>
+                <input type="checkbox" id="check1">
+            </div>
+            <div class="checklist-item">
+                <label for="check2">10行を超過していないか</label>
+                <input type="checkbox" id="check2">
+            </div>
+            <div class="checklist-item">
+                <label for="check3">引用RT想定なら4行にまとまっているか</label>
+                <input type="checkbox" id="check3">
+            </div>
+            <div class="checklist-item">
+                <label for="check4">140文字をオーバーしていないか</label>
+                <input type="checkbox" id="check4">
+            </div>
+            <div class="checklist-item">
+                <label for="check5">日時は合っているか</label>
+                <input type="checkbox" id="check5">
+            </div>
+            <div class="checklist-item">
+                <label for="check6">曜日は合っているか</label>
+                <input type="checkbox" id="check6">
+            </div>
+            <div class="checklist-item">
+                <label for="check7">画像内の日時は合っているか</label>
+                <input type="checkbox" id="check7">
+            </div>
+            <div class="checklist-item">
+                <label for="check8">画像内の曜日は合っているか</label>
+                <input type="checkbox" id="check8">
+            </div>
+            <div class="checklist-item">
+                <label for="check9">画像VRChatのロゴが必要か</label>
+                <input type="checkbox" id="check9">
+            </div>
+            <div class="checklist-item">
+                <label for="check10">#Vketはついているか</label>
+                <input type="checkbox" id="check10">
+            </div>
+            <div class="checklist-item">
+                <label for="check11">プレス画像から取ってきたか</label>
+                <input type="checkbox" id="check11">
+            </div>
+            <div class="checklist-item">
+                <label for="check12">「ぶいけっとにゃん」表記になっているか</label>
+                <input type="checkbox" id="check12">
+            </div>
+            <div class="checklist-item">
+                <label for="check13">動画消えてないか</label>
+                <input type="checkbox" id="check13">
+            </div>
+            <div class="checklist-item">
+                <label for="check14">絵文字がセミコロンになっていないか</label>
+                <input type="checkbox" id="check14">
+            </div>
+            <div class="checklist-item">
+                <label for="check15">@Virtual_Market_ のアンダーバーが合ってるか</label>
+                <input type="checkbox" id="check15">
+            </div>
+        </div>
+
         <div class="preview-section">
             <div class="preview-header">
                 <div class="preview-avatar"></div>
@@ -281,8 +372,9 @@
                 // CJK Unified Ideographs, Hiragana, Katakana, and Full-width characters
                 if (
                     (charCode >= 0x4E00 && charCode <= 0x9FFF) || // CJK Unified Ideographs
-                    (charCode >= 0x3040 && charCode <= 0x30FF) || // Hiragana & Katakana
-                    (charCode >= 0xFF00 && charCode <= 0xFFEF)    // Half-width and Full-width Forms
+                    (charCode >= 0x3040 && charCode <= 0x309F) || // Hiragana
+                    (charCode >= 0x30A0 && charCode <= 0x30FF) || // Katakana
+                    (charCode >= 0xFF00 && charCode <= 0xFFEF)    // Full-width and Half-width Forms
                 ) {
                     length += 2; // These characters count as 2
                 } else {
